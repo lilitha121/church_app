@@ -73,6 +73,9 @@ class Card extends Component {
                 nameAndSurname: Yup.string()
                 .required("VALIDATION_FIELD_REQUIRED"),
 
+                facebook: Yup.string()
+                .required("VALIDATION_FIELD_REQUIRED"),
+
                 age: Yup.string()
                 .required("VALIDATION_FIELD_REQUIRED"),
 
@@ -84,7 +87,10 @@ class Card extends Component {
                 .required("Address is Required"),
 
               block: Yup.string()
-              .required("Address is Required"),
+              .required("Block name is Required"),
+
+              church: Yup.string()
+              .required("Church name is Required"),
             })}
 
             onSubmit={(fields) => {
