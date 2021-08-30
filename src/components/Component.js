@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import ReactToPrint from "react-to-print";
 import CardPrint from "../print/ComponentPrint";
-import Upload from "../Upload"
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import index from "../index"
 import { submitAction } from "../action";
 import { connect } from "react-redux";
-import "../App/App.css";
+import "../App";
 class Card extends Component {
   constructor(props) {
     super(props);
@@ -17,113 +15,89 @@ class Card extends Component {
     const {
       addPhoto,
       nameAndSurname,
-      age,
-      phoneno,
-      address,
+      ageAndFacebook,
+      cellAndAdress,
       postalCode,
-      facebook,
-      church,
-      block,
-      submitAction,
-      
-     
-      
+      churchAndBlock,
+      // submitAction,
     } = this.props;
 
     return (
       <div>
-
         {/* <Upload/> */}
-        
+<Index/>
         <div style={{ display: "none" }}>
           <CardPrint
-          
             addPhoto={addPhoto}
             nameAndSurname={nameAndSurname}
-            age={age}
-            phoneno={phoneno}
-            address={address}
+            ageAndFacebook={ageAndFacebook}
+            cellAndAdress={cellAndAdress}
             postalCode={postalCode}
-            facebook={facebook}
-            church={church}
-            block={block}
-           
-           
+            churchAndBlock={churchAndBlock}
             ref={(el) => (this.componentRef = el)}
           />
         </div>
         <div>
-          <Formik
+          {/* <Formik
             initialValues={{
               addPhoto: "",
-              nameAndSurname:"",
-              age:"",
-              phoneno: "",
-              address: "",
+              nameAndSurname: "",
+              ageAndFacebook: "",
+              cellAndAdress: "",
               postalCode: "",
-              church:"",
-              block:"",
-              
-            
+              churchAndBlock: "",
             }}
             validationSchema={Yup.object().shape({
-              addPhoto: Yup.string()
-                .required("VALIDATION_FIELD_REQUIRED"),
+              addPhoto: Yup.string().required("VALIDATION_FIELD_REQUIRED"),
 
-                nameAndSurname: Yup.string()
-                .required("VALIDATION_FIELD_REQUIRED"),
+              nameAndSurname: Yup.string().required(
+                "VALIDATION_FIELD_REQUIRED"
+              ),
 
-                facebook: Yup.string()
-                .required("VALIDATION_FIELD_REQUIRED"),
+              ageAndFacebook: Yup.string().required(
+                "VALIDATION_FIELD_REQUIRED"
+              ),
 
-                age: Yup.string()
-                .required("VALIDATION_FIELD_REQUIRED"),
-
-                phoneno: Yup.string()
+              cellAndAdress: Yup.string()
                 .matches(/^[0-9]{10}$/, "Should be a number of length 10")
                 .required("Contact Number is required"),
 
-                address: Yup.string()
-                .required("Address is Required"),
-
-              block: Yup.string()
-              .required("Block name is Required"),
-
-              church: Yup.string()
-              .required("Church name is Required"),
+              churchAndBlock: Yup.string().required("Block name is Required"),
             })}
-
             onSubmit={(fields) => {
               submitAction(fields);
             }}
-
-            render={({ errors, status, touched }) => (
-              <Form >
+            render={({ errors, touched }) => (
+              <Form>
                 <label className="header">Visionaries Of The ALTAR </label>
-               
-                <div>
-                  <label for="addPhoto">Add Photo</label>
 
+                <div>
+                  <label for="photo-upload" className="custom-file-upload fas">
+                    <div className="custom-file-upload fas">
+                      <img alt="Upload"  />
+                    </div>
+                  </label>
                   <Upload
-                    name="addPhoto"
+                    name="photo-upload"
                     type="file"
                     className={
                       "" +
                       (errors.addPhoto && touched.addPhoto ? " is-invalid" : "")
                     }
+                   
                   />
                   <ErrorMessage
                     name="addPhoto"
                     component="div"
                     className="invalid-feedback"
                   />
-                  
                 </div>
-                <div >
-                  <label className="Text-inputs label" for="nameAndSurname">Name & Surname:  </label>
+                <div>
+                  <label className="Text-inputs label" for="nameAndSurname">
+                    Name & Surname:{" "}
+                  </label>
 
                   <Field
-                
                     name="nameAndSurname"
                     type="text"
                     placeholder="Your name and surname please"
@@ -138,8 +112,10 @@ class Card extends Component {
                     className="invalid-feedback"
                   />
                 </div>
-                <div >
-                  <label className="Text-inputs label" for="facebook">Facebook Name:  </label>
+                <div>
+                  <label className="Text-inputs label" for="facebook">
+                    Facebook Name:{" "}
+                  </label>
                   <Field
                     name="facebook"
                     type="text"
@@ -155,15 +131,17 @@ class Card extends Component {
                     className="invalid-feedback"
                   />
                 </div>
-              
-                <div >
-                  <label className="Text-inputs label" for="age">Age:  </label>
+
+                <div>
+                  <label className="Text-inputs label" for="age">
+                    Age:{" "}
+                  </label>
                   <Field
                     name="age"
                     type="text"
                     placeholder="Your age please"
                     className={
-                      "Text-inputs"+
+                      "Text-inputs" +
                       (errors.pincode && touched.pincode ? " is-invalid" : "")
                     }
                   />
@@ -171,10 +149,12 @@ class Card extends Component {
                     name="age"
                     component="div"
                     className="invalid-feedback"
-              />
+                  />
                 </div>
-                <div >
-                  <label className="Text-inputs label" for="phoneno">Contact Number: </label>
+                <div>
+                  <label className="Text-inputs label" for="phoneno">
+                    Contact Number:{" "}
+                  </label>
                   <Field
                     name="phoneno"
                     type="phoneno"
@@ -190,14 +170,16 @@ class Card extends Component {
                     className="invalid-feedback"
                   />
                 </div>
-                <div >
-                  <label className="Text-inputs label" for="address">Address: </label>
+                <div>
+                  <label className="Text-inputs label" for="address">
+                    Address:{" "}
+                  </label>
                   <Field
                     name="address"
                     type="address"
                     placeholder="Your current home adress please"
                     className={
-                      "Text-inputs"+
+                      "Text-inputs" +
                       (errors.address && touched.address ? " is-invalid" : "")
                     }
                   />
@@ -206,9 +188,11 @@ class Card extends Component {
                     component="div"
                     className="invalid-feedback"
                   />
-                 </div>
-                <div >
-                  <label className="Text-inputs label" for="postalCode">Postal Code: </label>
+                </div>
+                <div>
+                  <label className="Text-inputs label" for="postalCode">
+                    Postal Code:{" "}
+                  </label>
                   <Field
                     name="pincode"
                     type="pincode"
@@ -224,15 +208,17 @@ class Card extends Component {
                     className="invalid-feedback"
                   />
                 </div>
-                <div >
-                  <label className="Text-inputs label" for="block">Block:  </label>
+                <div>
+                  <label className="Text-inputs label" for="block">
+                    Block:{" "}
+                  </label>
                   <Field
                     name="block"
                     type="text"
                     placeholder="Your church block please"
                     className={
                       "Text-inputs" +
-                      (errors.block && touched.block? " is-invalid" : "")
+                      (errors.block && touched.block ? " is-invalid" : "")
                     }
                   />
                   <ErrorMessage
@@ -240,15 +226,17 @@ class Card extends Component {
                     component="div"
                     className="invalid-feedback"
                   />
-                 </div>
-                <div >
-                  <label className="Text-inputs label" for="church">Church:  </label>
+                </div>
+                <div>
+                  <label className="Text-inputs label" for="church">
+                    Church:{" "}
+                  </label>
                   <Field
                     name="church"
                     type="text"
                     placeholder="Your church name please"
                     className={
-                      "Text-inputs"+
+                      "Text-inputs" +
                       (errors.block && touched.block ? " is-invalid" : "")
                     }
                   />
@@ -258,31 +246,28 @@ class Card extends Component {
                     className="invalid-feedback"
                   />
                 </div>
-                <div >
-                  <button className="Input-button">
-                    Register
-                  </button>
-                
+                <div>
+                  <button className="Input-button">Register</button>
                 </div>
+                </Form>
+                  */
                 <ReactToPrint
-          trigger={() => (
-
-            <button
-              style={{
-                textAlign: "center",
-                marginLeft: "50%",
-                backgroundColor: "lemonchiffon",
-                width: "62px",
-              }}
-            >
-              Print
-            </button>
-          )}
-          content={() => this.componentRef}
-        />
-              </Form>
-            )}
-          />
+                  trigger={() => (
+                    <button 
+                      style={{
+                        textAlign: "center",
+                        marginLeft: "50%",
+                        backgroundColor: "lemonchiffon",
+                        width: "62px",
+                      }}
+                    >
+                      Print
+                    </button>
+                  )}
+                  content={() => this.componentRef}
+                />
+              
+                    }
         </div>
       </div>
     );
@@ -292,14 +277,10 @@ class Card extends Component {
 const mapStateToProps = (state) => ({
   addPhoto: state.addPhoto,
   nameAndSurname: state.nameAndSurname,
-  age: state.age,
-  facebook: state.facebook,
-  phoneno: state.phoneno,
-  address: state.address,
+  ageAndFacebook: state.ageAndFacebook,
+  cellAndAdress: state.cellAndAdress,
   pincode: state.postalCode,
-  block: state.block,
-  church: state.church,
-
+  churchAndBlock: state.churchAndBlock,
 });
 
 const mapDispatchToProps = (dispatch) => ({
